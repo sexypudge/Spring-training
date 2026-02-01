@@ -1,5 +1,7 @@
 package org.example.springtraining;
 
+import org.example.springtraining.domain.Girl;
+import org.example.springtraining.service.GirlService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,11 +13,12 @@ public class SpringTrainingApplication {
 
         ApplicationContext context = SpringApplication.run(SpringTrainingApplication.class, args);
 
-        Girl girl = context.getBean(Girl.class);
+        GirlService girlService = context.getBean(GirlService.class);
+        // Lấu ra random một cô gái từ tầng service
+        Girl girl = girlService.getRandomGirl();
+        // In ra màn hình
+        System.out.println(girl);
 
-        System.out.println("Instance của Girl: " + girl);
-        System.out.println("Outfit của Girl: " + girl.outfit);
-        girl.show();
     }
 
 }
