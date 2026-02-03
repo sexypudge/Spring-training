@@ -1,6 +1,7 @@
 package org.example.springtraining;
 
 import org.example.springtraining.domain.Girl;
+import org.example.springtraining.domain.MySqlConnector;
 import org.example.springtraining.service.GirlService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,8 @@ public class SpringTrainingApplication {
         // In ra màn hình
         System.out.println(girl);
 
+        MySqlConnector connector = context.getBean(MySqlConnector.class);
+        connector.connect();
     }
 
 }
