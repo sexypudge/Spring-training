@@ -45,6 +45,8 @@ public class FirstSpringbootApplication {
 		Boy1Service boy1Service= context.getBean(Boy1Service.class);
 		Boy1 boy11 = boy1Service.getRandomBoy1();
 		System.out.println(boy11);
+
+
 		}
 	}
 
