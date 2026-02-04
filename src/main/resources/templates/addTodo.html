@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Thêm công việc</title></head>
+<body>
+<h1>Tạo To-do mới</h1>
+<form th:action="@{/addTodo}" th:object="${todo}" method="post">
+    <p>Tiêu đề: <input type="text" th:field="*{title}" /></p>
+    <p>Chi tiết: <input type="text" th:field="*{detail}" /></p>
+    <button type="submit">Thêm ngay</button>
+</form>
+</body>
+</html>
