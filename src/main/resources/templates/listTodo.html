@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Danh sách To-do</title></head>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Loda To-do</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
 <body>
-<h1>Việc cần làm:</h1>
-<ul>
-    <li th:each="todo : ${todoList}">
-        <span th:text="${todo.title}"></span> : <span th:text="${todo.detail}"></span>
-    </li>
-</ul>
-<a href="/addTodo">+ Thêm mới</a>
+<div class="container mt-5">
+    <h1 th:text="#{loda.value.listTodo} + ':'"></h1>
+
+    <ul class="list-group my-4">
+        <li th:each="todo : ${todoList}" class="list-group-item">
+            <strong th:text="${todo.title}"></strong> :
+            <span th:text="${todo.detail}"></span>
+        </li>
+    </ul>
+
+    <a th:href="@{/addTodo}"
+       th:text="#{loda.value.addTodo}"
+       class="btn btn-success"></a>
+
+    <a th:href="@{/}" class="btn btn-secondary">Trang chủ</a>
+</div>
 </body>
 </html>

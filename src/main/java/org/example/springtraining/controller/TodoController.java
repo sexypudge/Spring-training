@@ -1,35 +1,47 @@
 package org.example.springtraining.controller;
 
 import org.example.springtraining.domain.Todo;
+import org.example.springtraining.service.TodoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Controller
 public class TodoController {
-    // List tạm thay Database
-    List<Todo> todoList = new CopyOnWriteArrayList<>();
 
-    // Lấy danh sách việc cần làm
+    @Autowired
+    private TodoService todoService;
+
+    /*
+    @RequestParam dùng để đánh dấu một biến là request param trong request gửi lên server.
+    Nó sẽ gán dữ liệu của param-name tương ứng vào biến
+     */
     @GetMapping("/listTodo")
     public String index(Model model, @RequestParam(value = "limit", required = false) Integer limit) {
-        model.addAttribute("todoList", limit != null ? todoList.subList(0, limit) : todoList);
+        // Trả về đối tượng todoList.
+        model.addAttribute("todoList", todoService.findAll(limit));
+        // Trả về template "listTodo.html"
         return "listTodo";
     }
 
-    // Trả về trang thêm công việc
     @GetMapping("/addTodo")
     public String addTodo(Model model) {
         model.addAttribute("todo", new Todo());
         return "addTodo";
     }
 
-    // Nhận dữ liệu từ Form gửi lên
+    /*
+    @ModelAttribute đánh dấu đối tượng Todo được gửi lên bởi Form Request
+     */
     @PostMapping("/addTodo")
     public String addTodo(@ModelAttribute Todo todo) {
-        todoList.add(todo);
-        return "success";
+        return Optional.ofNullable(todoService.add(todo))
+                .map(t -> "success") // Trả về success nếu save thành công
+                .orElse("failed"); // Trả về failed nếu không thành công
+
     }
 }
