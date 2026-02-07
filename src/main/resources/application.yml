@@ -1,0 +1,5 @@
+error-config:
+  not-found-code: 10100
+  not-found-msg: "Xin lỗi, đối tượng này không tồn tại trong hệ thống"
+  server-error-code: 10000
+  server-error-msg: "Có lỗi xảy ra, vui lòng thử lại sau"
