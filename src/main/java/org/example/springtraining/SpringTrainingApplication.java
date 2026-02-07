@@ -1,28 +1,18 @@
 package org.example.springtraining;
 
-import org.example.springtraining.domain.Girl;
-import org.example.springtraining.domain.MySqlConnector;
 import org.example.springtraining.service.GirlService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class SpringTrainingApplication {
+public class SpringTrainingApplication { // Thêm dòng này
 
     public static void main(String[] args) {
-
         ApplicationContext context = SpringApplication.run(SpringTrainingApplication.class, args);
-
         GirlService girlService = context.getBean(GirlService.class);
-        // Lấu ra random một cô gái từ tầng service
-        Girl girl = girlService.getRandomGirl();
-        // In ra màn hình
-        System.out.println(girl);
 
-        MySqlConnector connector = context.getBean(MySqlConnector.class);
-        connector.connect();
+        // Thử thêm 1 cô gái vào DB thenn
+        girlService.createGirl("thenn");
     }
-
-}
-
+} // Thêm dấu đóng ngoặc này
